@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const dataGenerator = require('../util/dataGenerator');
 
-router.get("/", (req, res) => {
+router.get("/faker", (req, res) => {
   const jsonData = req.body;
 
   console.log(jsonData.content); // Array of content objects
