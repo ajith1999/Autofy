@@ -23,5 +23,5 @@ app.use("/api", apiRouter);
 
 
 app.listen(port, () => {
-  console.log("Started");
+  console.log(`Server listening on port ${port}`);
 });
