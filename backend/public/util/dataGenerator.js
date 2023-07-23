@@ -1,7 +1,7 @@
 const { faker } = require("@faker-js/faker");
 const { randPhoneNumber } = require("@ngneat/falso");
 
-function generateRandomData(dataType) {
+function generateRandomData(dataType,options) {
   switch (dataType) {
     case "name":
       return faker.person.firstName();
@@ -10,7 +10,8 @@ function generateRandomData(dataType) {
     case "address":
       return faker.address.streetAddress();
     case "phoneNumber":
-      return randPhoneNumber();
+      const code = options?.code ?? 'IN';  
+      return randPhoneNumber({ countryCode: code });
     default:
       throw new Error(`Invalid data type: ${dataType}`);
   }
@@ -24,8 +25,8 @@ function generateData(input) {
     const dataRow = {};
 
     for (const field of content) {
-      const { fieldName, dataType } = field;
-      dataRow[fieldName] = generateRandomData(dataType); // Call faker method dynamically
+      const { fieldName, dataType , options} = field;
+      dataRow[fieldName] = generateRandomData(dataType,options); // Call faker method dynamically
 
       console.log(dataRow);
     }
