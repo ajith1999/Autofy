@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { faker } = require('@faker-js/faker');
+const { randPhoneNumber } = require('@ngneat/falso');
 
 router.get("/", (req, res) => {
   const jsonData = req.body;
@@ -22,7 +23,7 @@ function generateRandomData(dataType) {
     case 'address':
       return faker.address.streetAddress();
     case 'phoneNumber':
-      return faker.phone.number();
+      return randPhoneNumber();
     default:
       throw new Error(`Invalid data type: ${dataType}`);
   }
