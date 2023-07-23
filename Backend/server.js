@@ -10,5 +10,5 @@ app.get("/api", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log("Blalalla");
+  console.log("Started");
 });
