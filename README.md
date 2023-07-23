@@ -20,3 +20,14 @@
 
 [API Documentation](https://documenter.getpostman.com/view/12479348/2s946ma9nT)
 
+
+## Deployment
+
+To deploy this project run
+
+```bash
+
+docker-compose build      # Build the Docker images
+docker-compose up -d     # Start the Docker containers in detached mode
+
+```
