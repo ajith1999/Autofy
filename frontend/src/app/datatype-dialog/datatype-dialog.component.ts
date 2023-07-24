@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {DataType, datas} from '../datatypes/data';
 
 @Component({
   selector: 'app-datatype-dialog',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DatatypeDialogComponent implements OnInit {
 
-  constructor() { }
+  public dataTypes: DataType[];
+
+  constructor(
+    public dialogRef: MatDialogRef<DatatypeDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+  ) {
+     this.dataTypes = [...datas];
+  }
 
   ngOnInit(): void {
+
   }
 
 }
