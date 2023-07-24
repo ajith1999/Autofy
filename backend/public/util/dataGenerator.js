@@ -5,6 +5,7 @@ const {
   randCompanyName,
   randCurrencyCode,
 } = require("@ngneat/falso");
+const { generateRandomSeries } = require("./sequenceGenerator");
 
 function generateRandomData(dataType, options) {
   switch (dataType) {
@@ -26,6 +27,14 @@ function generateRandomData(dataType, options) {
       return faker.string.alphanumeric(size);  
     case "currency_code":
       return randCurrencyCode();  
+    case "naming_series":
+      const { is_random, format } = options;
+
+      if (typeof is_random !== 'boolean' || typeof format !== 'string' || !format.includes("###")) {
+        throw new Error("Invalid options. 'is_random' should be boolean and 'format' should be a string containing '###'.");
+      }
+      return generateRandomSeries(format);  
+
     default:
       throw new Error(`Invalid data type: ${dataType}`);
   }

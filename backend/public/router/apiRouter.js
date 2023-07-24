@@ -10,11 +10,12 @@ router.get("/faker", (req, res) => {
     res.status(200).json(data);
   } catch (error) {
     console.error("Error generating data:", error);
-    if (error.message.includes("Invalid data type")) {
+    
       res.status(400).json({ error: error.message });
-    } else {
-      res.status(500).json({ error: "An error occurred while generating data." });
-    }
+    
+     //TODO : handle generic errors 
+     // res.status(500).json({ error: "An error occurred while generating data." });
+    
   }
   
 });
