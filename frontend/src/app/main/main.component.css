@@ -1,11 +1,51 @@
 .demo-table {
   width: 100%;
+  padding: 20px;
+  margin: 20px;
+  text-align: center;
+  background-color: white;
+  border-radius: 20px;
 }
 
 .demo-button-container {
   padding-bottom: 16px;
+  margin: 20px;
 }
 
-.demo-button + .demo-button {
-  margin-left: 8px;
+.demo-button {
+  margin: 20px;
+  width: 400px;
+  height: 70px;
+  border-radius: 10px;
+  background-color: lightgreen;
+}
+
+.home-area {
+  padding: 40px;
+  margin-left: 200px;
+  margin-right: 200px;
+
+  border-radius: 15px;
+}
+
+img {
+  width: 40px;
+}
+
+.table-cell {
+  width: 400px;
+
+  padding: 0;
+  margin: 0;
+  border-color: white;
+}
+
+.table-input {
+  height: 100%;
+}
+
+.header-cell {
+  text-align: center;
+  font-size: 30px;
+  border-color: ivory;
 }
