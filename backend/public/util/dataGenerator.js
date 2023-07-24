@@ -8,9 +8,9 @@ function generateRandomData(dataType,options) {
     case "email":
       return faker.internet.email();
     case "address":
-      return faker.address.streetAddress();
+      return faker.location.streetAddress();
     case "phoneNumber":
-      const code = options?.code ?? 'IN';  
+      const code = options?.country_code ?? 'IN';  
       return randPhoneNumber({ countryCode: code });
     default:
       throw new Error(`Invalid data type: ${dataType}`);
@@ -18,15 +18,15 @@ function generateRandomData(dataType,options) {
 }
 
 function generateData(input) {
-  const { content, rows } = input;
+  const { columns_attributes, num_rows } = input;
   const output = [];
 
-  for (let i = 0; i < rows; i++) {
+  for (let i = 0; i < num_rows; i++) {
     const dataRow = {};
 
-    for (const field of content) {
-      const { fieldName, dataType , options} = field;
-      dataRow[fieldName] = generateRandomData(dataType,options); // Call faker method dynamically
+    for (const field of columns_attributes) {
+      const { name, dataType , options} = field;
+      dataRow[name] = generateRandomData(dataType,options); // Call faker method dynamically
 
       console.log(dataRow);
     }

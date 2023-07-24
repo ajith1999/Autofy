@@ -5,12 +5,18 @@ const dataGenerator = require('../util/dataGenerator');
 router.get("/faker", (req, res) => {
   const jsonData = req.body;
 
-  console.log(jsonData.content); // Array of content objects
-  console.log(jsonData.rows); // 100
-  console.log(jsonData.downloadType); // null
-
-
-  res.status(200).json(dataGenerator.generateData(jsonData));
+  try {
+    const data = dataGenerator.generateData(jsonData);
+    res.status(200).json(data);
+  } catch (error) {
+    console.error("Error generating data:", error);
+    if (error.message.includes("Invalid data type")) {
+      res.status(400).json({ error: error.message });
+    } else {
+      res.status(500).json({ error: "An error occurred while generating data." });
+    }
+  }
+  
 });
 
 
