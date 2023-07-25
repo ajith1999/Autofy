@@ -4,6 +4,7 @@ const {
   randAirportCode,
   randCompanyName,
   randCurrencyCode,
+  randBetweenDate,
 } = require("@ngneat/falso");
 const {
   generateRandomSeries,
@@ -33,6 +34,13 @@ function generateRandomData(dataType, options, sequence) {
       return faker.string.alphanumeric(size);
     case "currency_code":
       return randCurrencyCode();
+
+    case "boolean":
+      return faker.datatype.boolean();
+
+      case "date_time":
+        return randBetweenDate({ from: new Date(options.min_date), to: new Date(options.max_date) })
+
     case "naming_series":
       const { is_random, format } = options;
 
@@ -72,6 +80,14 @@ function generateRandomData(dataType, options, sequence) {
       } else {
         return generateSequentialNumberSeries(options.min, options.max);
       }
+
+      case "custom":
+        if (!options?.value || !Array.isArray(options.value) || options.value.length === 0) {
+          throw new Error("Invalid options. For custom datatype, 'value' should be a non-empty array.");
+        }
+  
+        const randomIndex = generateRandomNumber(0, options.value.length - 1);
+        return options.value[randomIndex];  
     default:
       throw new Error(`Invalid data type: ${dataType}`);
   }
