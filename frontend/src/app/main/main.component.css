@@ -72,5 +72,8 @@ img {
 
 ::ng-deep .mat-cell {
   border-bottom-style: none !important;
-  border-bottom-width: 2px;
+}
+
+.icon-display {
+  transform: scale(2);
 }

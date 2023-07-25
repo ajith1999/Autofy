@@ -25,7 +25,9 @@ export class MainComponent implements OnInit {
 
   constructor(public dialog: MatDialog) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.addData();
+  }
 
   openDialog(element: any): void {
     const dialogRef = this.dialog.open(DatatypeDialogComponent, {

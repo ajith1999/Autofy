@@ -16,16 +16,16 @@
 }
 
 .mat-card:hover {
-  background-color: lightblue;
+  background-color: rgb(207, 232, 240);
   cursor: pointer;
 }
 
 .mat-card.highlighted {
-  background-color: lightblue;
+  background-color: rgb(200, 234, 245);
   cursor: pointer;
 }
 
 .selected {
-  background-color: lightblue;
+  background-color: rgb(178, 225, 240);
   cursor: pointer;
 }
