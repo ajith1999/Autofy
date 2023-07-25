@@ -31,7 +31,7 @@
               matInput
               placeholder="Placeholder"
               [readonly]="true"
-              (click)="openDialog()"
+              (click)="openDialog(element)"
               [(ngModel)]="element.dataType"
               value="{{ element.dataType }}"
             />
@@ -42,7 +42,7 @@
       <!-- Option Column -->
       <ng-container matColumnDef="options">
         <th mat-header-cell class="header-cell" *matHeaderCellDef>Options</th>
-        <td mat-cell class="table-cell" *matCellDef="let element">
+        <td class="table-cell" *matCellDef="let element">
           {{ element.options }}
         </td>
       </ng-container>
@@ -51,7 +51,11 @@
       <ng-container matColumnDef="close">
         <th mat-header-cell class="header-cell" *matHeaderCellDef></th>
         <td mat-cell class="table-cell" *matCellDef="let element">
-          <button (click)="removeData()" aria-label="Clear" mat-icon-button>
+          <button
+            (click)="removeData(element)"
+            aria-label="Clear"
+            mat-icon-button
+          >
             <mat-icon>close</mat-icon>
           </button>
         </td>

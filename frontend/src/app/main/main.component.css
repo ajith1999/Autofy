@@ -69,3 +69,8 @@ img {
 }
 
 /**/
+
+::ng-deep .mat-cell {
+  border-bottom-style: none !important;
+  border-bottom-width: 2px;
+}

@@ -27,12 +27,12 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  openDialog(): void {
+  openDialog(element: any): void {
     const dialogRef = this.dialog.open(DatatypeDialogComponent, {
       panelClass: 'my-custom-dialog-class',
     });
 
-    dialogRef.afterClosed;
+    dialogRef.afterClosed().subscribe((val) => (element.dataType = val));
   }
 
   addData() {
@@ -54,8 +54,11 @@ export class MainComponent implements OnInit {
     console.log(this.dataSource);
   }
 
-  removeData() {
-    this.dataSource.pop();
+  removeData(element: any) {
+    const removeIndex = this.dataSource.findIndex(
+      (row) => row.name == element.name
+    );
+    this.dataSource.splice(removeIndex, 1);
     this.table.renderRows();
     console.log(this.dataSource);
   }

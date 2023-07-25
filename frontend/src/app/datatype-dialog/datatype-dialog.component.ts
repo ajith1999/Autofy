@@ -27,7 +27,7 @@ export class DatatypeDialogComponent implements OnInit {
   }
 
   sendSelectedData() {
-    this.dialogRef.close(this.selectedDataValue);
+    this.dialogRef.close(this.selectedDataValue?.title);
   }
 
   cancel() {
