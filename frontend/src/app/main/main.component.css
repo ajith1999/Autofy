@@ -17,7 +17,8 @@
   width: 400px;
   height: 70px;
   border-radius: 10px;
-  background-color: lightgreen;
+  background-color: #dadada;
+  color: white;
 }
 
 .home-area {
@@ -34,8 +35,7 @@ img {
 
 .table-cell {
   width: 400px;
-
-  padding: 0;
+  padding-top: 50px;
   margin: 0;
   border-color: white;
 }
@@ -47,5 +47,25 @@ img {
 .header-cell {
   text-align: center;
   font-size: 30px;
-  border-color: ivory;
+  border-color: rgb(255, 255, 255);
 }
+
+/*To maintain the size of mat form fields*/
+
+::ng-deep .mat-form-field-flex > .mat-form-field-infix {
+  padding: 0.4em 0px !important;
+}
+
+::ng-deep .mat-form-field-label-wrapper {
+  top: -1.5em;
+}
+
+::ng-deep
+  .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float
+  .mat-form-field-label {
+  transform: translateY(-1.7em) scale(1);
+  width: 133.33333%;
+  color: #3f51b5;
+}
+
+/**/

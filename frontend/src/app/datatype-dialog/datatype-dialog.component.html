@@ -1,20 +1,33 @@
 <h1 mat-dialog-title>Select DataType</h1>
 <mat-dialog-content>
   <mat-grid-list cols="3" rowHeight="2:1">
-    <mat-grid-tile *ngFor="let data of dataTypes">
-      <mat-card class="example-card">
+    <mat-grid-tile *ngFor="let data of dataTypes; index as i">
+      <mat-card
+        class="example-card"
+        (click)="selectDataType(i, data)"
+        [class.selected]="i === selectedDataIndex"
+      >
         <mat-card-header>
-          <mat-card-title>{{ data.title }}</mat-card-title>
+          <mat-card-title style="font-weight: bold; font-size: revert">{{
+            data.title
+          }}</mat-card-title>
         </mat-card-header>
-        <mat-divider></mat-divider>
         <mat-card-content>
-          <p>{{ data.description }}</p>
+          <p style="font-size: large">{{ data.description }}</p>
+          <p style="font-size: large; font-weight: 600">{{ data.category }}</p>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+  <button mat-button mat-dialog-close (click)="cancel()">Cancel</button>
+  <button
+    mat-button
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+    (click)="sendSelectedData()"
+  >
+    OK
+  </button>
 </mat-dialog-actions>

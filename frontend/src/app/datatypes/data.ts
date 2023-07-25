@@ -8,52 +8,47 @@ export const datas: DataType[] = [
   {
     title: 'Name',
     description:
-      'Randomly generated names for individuals and entities, like "John Doe," "Jane Smith," or "Acme Corporation."',
-    category: 'Logistics',
+      'Randomly generated names for individuals and entities, like "John Doe."',
+    category: 'General',
   },
   {
     title: 'Custom Field',
     description:
-      'Add custom data that will be generated sequentially or randomly.',
+      'Provide custom data that will be generated sequentially or randomly.',
     category: 'Logistics',
   },
   {
     title: 'Email id',
     description:
-      'Fictional email addresses resembling real formats, e.g., "john.doe@example.com" or "jane.smith@testmail.com."',
-    category: 'Logistics',
+      'Fictional email addresses resembling real formats, e.g., "john.doe@example.com"',
+    category: 'General',
   },
   {
     title: 'Phone number',
     description:
-      'Fictional phone numbers in various formats, including international and local numbers like "+1 (123) 456-7890" or "555-1234."',
-    category: 'Logistics',
+      'Fictional phone numbers based on the provided country code like "+1 (123) 456-7890" or "555-1234."',
+    category: 'General',
   },
   {
     title: 'Row id',
     description:
       'Sequentially generated unique identifiers for rows or records.',
-    category: 'Logistics',
+    category: 'General',
   },
   {
     title: 'Address',
     description:
       'Fictional addresses with street names, city, state, and postal codes.',
-    category: 'Logistics',
+    category: 'General',
   },
   {
-    title: 'Airport code/ Branch code',
+    title: 'Airport code/ IATA code',
     description: 'Unique identifiers for airports and branches worldwide.',
     category: 'Logistics',
   },
   {
     title: 'Company name',
     description: 'Randomly generated names for companies and organizations.',
-    category: 'Logistics',
-  },
-  {
-    title: 'Customer name',
-    description: 'Randomly generated names for customers and clients.',
     category: 'Logistics',
   },
   {
@@ -75,8 +70,8 @@ export const datas: DataType[] = [
   },
   {
     title: 'Boolean',
-    description: 'Fictional Boolean values representing true or false.',
-    category: 'Logistics',
+    description: 'Boolean values representing true or false.',
+    category: 'General',
   },
   {
     title: 'Naming series',
@@ -93,6 +88,6 @@ export const datas: DataType[] = [
   {
     title: 'Number',
     description: 'Randomly generated numeric values for different use cases.',
-    category: 'Logistics',
+    category: 'General',
   },
 ];

@@ -1,3 +1,31 @@
 .example-card {
   width: 400px;
 }
+
+::ng-deep .my-custom-dialog-class .mat-dialog-container {
+  display: block;
+  padding: 24px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  overflow: auto;
+  outline: 0;
+  width: 1500px;
+  height: 100%;
+  min-height: inherit;
+  max-height: inherit;
+}
+
+.mat-card:hover {
+  background-color: lightblue;
+  cursor: pointer;
+}
+
+.mat-card.highlighted {
+  background-color: lightblue;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: lightblue;
+  cursor: pointer;
+}
