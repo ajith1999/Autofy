@@ -41,24 +41,30 @@ function generateRandomSeries(format, lastNumber) {
   }
 }
 
+// Function to generate a random number within a range (inclusive)
+function generateRandomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Function to generate a random decimal number within a range
+function generateRandomDecimal(min, max, decimalPlaces) {
+  const randomDecimal = Math.random() * (max - min) + min;
+  return parseFloat(randomDecimal.toFixed(decimalPlaces));
+}
+
+// Function to generate a sequential number series within a range
+function generateSequentialNumberSeries(startNumber, endNumber) {
+  if (startNumber > endNumber) {
+    throw new Error("Invalid range for sequential series. Start number should be less than or equal to end number.");
+  }
+
+  return startNumber;
+}
+
 module.exports = {
   generateRandomSeries,
-  generateSequentialSeries
+  generateSequentialSeries,
+  generateRandomNumber,
+  generateRandomDecimal,
+  generateSequentialNumberSeries
 };
-
-// // Example usage:
-// let lastGeneratedNumber = 100; // For sequential series, keep track of the last generated number
-// const inputFormat = "shi##tt";
-
-// // Generate 5 random series
-// for (let i = 0; i < 5; i++) {
-//   const randomSeries = generateRandomSeries(inputFormat);
-//   console.log(randomSeries);
-// }
-
-// // Generate 5 sequential series
-// for (let i = 0; i < 5; i++) {
-//   const sequentialSeries = generateRandomSeries(inputFormat, lastGeneratedNumber);
-//   console.log(sequentialSeries);
-//   lastGeneratedNumber++; // Increment the last generated number for the next iteration
-// }

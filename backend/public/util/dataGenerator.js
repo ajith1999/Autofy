@@ -4,10 +4,17 @@ const {
   randAirportCode,
   randCompanyName,
   randCurrencyCode,
+  randBetweenDate,
 } = require("@ngneat/falso");
-const { generateRandomSeries } = require("./sequenceGenerator");
+const {
+  generateRandomSeries,
+  generateSequentialSeries,
+  generateRandomNumber,
+  generateRandomDecimal,
+  generateSequentialNumberSeries,
+} = require("./sequenceGenerator");
 
-function generateRandomData(dataType, options) {
+function generateRandomData(dataType, options, sequence) {
   switch (dataType) {
     case "name":
       return faker.person.firstName();
@@ -24,17 +31,63 @@ function generateRandomData(dataType, options) {
       return randCompanyName();
     case "alpha_numeric":
       const size = options?.size ?? 5;
-      return faker.string.alphanumeric(size);  
+      return faker.string.alphanumeric(size);
     case "currency_code":
-      return randCurrencyCode();  
+      return randCurrencyCode();
+
+    case "boolean":
+      return faker.datatype.boolean();
+
+      case "date_time":
+        return randBetweenDate({ from: new Date(options.min_date), to: new Date(options.max_date) })
+
     case "naming_series":
       const { is_random, format } = options;
 
-      if (typeof is_random !== 'boolean' || typeof format !== 'string' || !format.includes("###")) {
-        throw new Error("Invalid options. 'is_random' should be boolean and 'format' should be a string containing '###'.");
+      if (
+        typeof is_random !== "boolean" ||
+        typeof format !== "string" ||
+        !format.includes("###")
+      ) {
+        throw new Error(
+          "Invalid options. 'is_random' should be boolean and 'format' should be a string containing '###'."
+        );
       }
-      return generateRandomSeries(format);  
+      if (is_random) {
+        return generateRandomSeries(format);
+      } else {
+        return generateSequentialSeries(format, sequence);
+      }
+    case "number":
+      if (
+        !options?.is_random && (
+        !options.min ||
+        !options.max )
+      ) {
+        throw new Error(
+          "Invalid options. For number datatype, 'is_random', 'min', 'max' are required."
+        );
+      }
+      if (options?.decimal_place) {
+        return generateRandomDecimal(
+          options.min,
+          options.max,
+          options.decimal_place
+        );
+      }
+      if (options.is_random) {
+        return generateRandomNumber(options.min, options.max);
+      } else {
+        return generateSequentialNumberSeries(options.min, options.max);
+      }
 
+      case "custom":
+        if (!options?.value || !Array.isArray(options.value) || options.value.length === 0) {
+          throw new Error("Invalid options. For custom datatype, 'value' should be a non-empty array.");
+        }
+  
+        const randomIndex = generateRandomNumber(0, options.value.length - 1);
+        return options.value[randomIndex];  
     default:
       throw new Error(`Invalid data type: ${dataType}`);
   }
@@ -49,7 +102,7 @@ function generateData(input) {
 
     for (const field of columns_attributes) {
       const { name, dataType, options } = field;
-      dataRow[name] = generateRandomData(dataType, options); // Call faker method dynamically
+      dataRow[name] = generateRandomData(dataType, options, i); // Call faker method dynamically
     }
 
     output.push(dataRow);
