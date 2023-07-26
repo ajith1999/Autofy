@@ -92,13 +92,21 @@ mat-table {
   padding-bottom: 16px;
   margin: 20px;
   justify-content: center;
-  margin-left: 800px;
+  margin-left: 600px;
 }
 
 .gen-button {
   margin: 20px;
   width: 400px;
-  height: 70px;
+  height: 81px;
   border-radius: 10px;
-  background-color: rgb(21, 237, 179);
+  background-color: rgb(218, 254, 255);
+}
+
+.table-name {
+  margin: 20px;
+  width: 400px;
+  height: 70px;
+  padding: 15px;
+  border-radius: 10px;
 }

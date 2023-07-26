@@ -42,10 +42,11 @@ function generateRandomData(dataType, options, sequence) {
       return faker.datatype.boolean();
 
     case "date_time":
-      return randBetweenDate({
+      let date = randBetweenDate({
         from: new Date(options.min_date),
         to: new Date(options.max_date),
       });
+      return formatDate(date);
 
     case "naming_series":
       const { is_random, format } = options;
@@ -117,6 +118,14 @@ function generateData(input) {
   }
 
   return output;
+}
+
+function formatDate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed, so we add 1.
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}/${month}/${day}`;
 }
 
 module.exports = {

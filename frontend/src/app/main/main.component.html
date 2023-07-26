@@ -113,10 +113,23 @@
         placeholder="No.of Rows"
         [(ngModel)]="rows"
       />
+      <input
+        class="table-name"
+        placeholder="Table Name"
+        [(ngModel)]="tableName"
+      />
     </div>
   </div>
 
   <div class="gen-button-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Data Type</mat-label>
+      <mat-select [(ngModel)]="fileFormat">
+        <mat-option value="sql">SQL</mat-option>
+        <mat-option value="json">JSON</mat-option>
+        <mat-option value="excel">EXCEL</mat-option>
+      </mat-select>
+    </mat-form-field>
     <button
       mat-button
       color="green"

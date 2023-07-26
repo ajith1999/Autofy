@@ -7,6 +7,7 @@ import { OptionDialogComponent } from '../option-dialog/option-dialog.component'
 import { DataService } from '../service/data.service';
 import { PreviewDialogComponent } from '../preview-dialog/preview-dialog.component';
 import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
 
 const TABLE_DATA: TableData[] = [];
 
@@ -22,6 +23,7 @@ export class MainComponent implements OnInit {
   jsonBody: ApiData | undefined;
   tableName: string | undefined;
   resultSet: any;
+  fileFormat: any;
 
   @ViewChild(MatTable) table: MatTable<TableData>;
 
@@ -73,7 +75,6 @@ export class MainComponent implements OnInit {
       'naming_series',
       'phone_number',
       'number',
-      'date_time',
     ];
     return !enabledList.some((val) => val === element.datatype_json);
   }
@@ -86,8 +87,8 @@ export class MainComponent implements OnInit {
       options: {
         min: undefined,
         max: undefined,
-        min_date: undefined,
-        max_date: undefined,
+        min_date: new Date('2020-01-01'),
+        max_date: new Date('2023-06-01'),
         value: [],
         country_code: '',
         is_random: true,
@@ -135,7 +136,13 @@ export class MainComponent implements OnInit {
       },
       (err) => console.log(err),
       () => {
-        this.exportSQL(this.resultSet, 'MOCK_TABLE');
+        if (this.fileFormat === 'sql') {
+          this.exportSQL(this.resultSet, this.tableName);
+        } else if (this.fileFormat === 'excel') {
+          this.exportExcel(this.resultSet);
+        } else if (this.fileFormat === 'json') {
+          this.exportJSON(this.resultSet);
+        }
       }
     );
   }
@@ -187,5 +194,27 @@ export class MainComponent implements OnInit {
     const insertQuery = this.generateInsertQuery(jsonDataArray, tableName);
     const blob = new Blob([insertQuery], { type: 'text/plain;charset=utf-8' });
     saveAs(blob, 'output.sql');
+  }
+
+  exportExcel(jsonDataArray: any) {
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(jsonDataArray);
+    const workbook: XLSX.WorkBook = {
+      Sheets: { data: worksheet },
+      SheetNames: ['data'],
+    };
+    const excelBuffer: any = XLSX.write(workbook, {
+      bookType: 'xlsx',
+      type: 'array',
+    });
+    const excelBlob: Blob = new Blob([excelBuffer], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8',
+    });
+    saveAs(excelBlob, 'output.xlsx');
+  }
+
+  exportJSON(jsonDataArray: any) {
+    const insertQuery = JSON.stringify(jsonDataArray);
+    const blob = new Blob([insertQuery], { type: 'text/plain;charset=utf-8' });
+    saveAs(blob, 'output.json');
   }
 }
