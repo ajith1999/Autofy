@@ -21,6 +21,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { OptionDialogComponent } from './option-dialog/option-dialog.component';
+import { PreviewDialogComponent } from './preview-dialog/preview-dialog.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { OptionDialogComponent } from './option-dialog/option-dialog.component';
     AboutComponent,
     DatatypeDialogComponent,
     OptionDialogComponent,
+    PreviewDialogComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,55 @@
 <h1 mat-dialog-title>Options</h1>
-<mat-dialog-content> </mat-dialog-content>
+<mat-dialog-content class="content">
+  <!-- Custom Field -->
+  <ng-container *ngIf="data.datatype == 'custom_field'">
+    <mat-form-field appearance="outline" class="table-cell">
+      <input matInput [(ngModel)]="custom_field" />
+      <mat-hint>Enter your data</mat-hint>
+    </mat-form-field>
+  </ng-container>
+
+  <!-- Naming Series -->
+  <ng-container *ngIf="data.datatype == 'naming_series'">
+    <mat-form-field appearance="outline" class="table-cell">
+      <input matInput [(ngModel)]="naming_series" />
+      <mat-hint>Enter your data</mat-hint>
+    </mat-form-field>
+  </ng-container>
+
+  <!-- Phone Number -->
+  <ng-container *ngIf="data.datatype == 'phone_number'">
+    <mat-form-field appearance="outline" class="table-cell">
+      <input matInput [(ngModel)]="country_code" />
+      <mat-hint>Select Country Code</mat-hint>
+    </mat-form-field>
+  </ng-container>
+
+  <!-- Number -->
+  <ng-container *ngIf="data.datatype == 'number'">
+    <mat-form-field appearance="outline" class="num-cell">
+      <input matInput [(ngModel)]="min" type="number" />
+      <mat-hint>Min Number</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="num-cell">
+      <input matInput [(ngModel)]="max" type="number" />
+      <mat-hint>Max Number</mat-hint>
+    </mat-form-field>
+  </ng-container>
+
+  <!-- Date Time-->
+  <ng-container *ngIf="data.datatype == 'date_time'">
+    <mat-form-field appearance="outline" class="table-cell">
+      <input matInput [(ngModel)]="min_date" />
+      <mat-hint>Min Date</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="table-cell">
+      <input matInput [(ngModel)]="max_date" />
+      <mat-hint>Max Date</mat-hint>
+    </mat-form-field>
+  </ng-container>
+</mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>OK</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="sendData()">OK</button>
 </mat-dialog-actions>

@@ -31,7 +31,6 @@
               matInput
               placeholder="eg. IATA Code, Airlines"
               [readonly]="true"
-              (click)="openDialog(element)"
               [(ngModel)]="element.dataType"
               value="{{ element.dataType }}"
             />
@@ -56,7 +55,8 @@
               matInput
               placeholder="Config options"
               [readonly]="true"
-              (click)="openDialog(element)"
+              [disabled]="optionsDisabled(element)"
+              (click)="openOptionsDialog(element)"
               value="{{ element.options.html_value }}"
             />
             <button aria-label="Clear" mat-icon-button matSuffix>

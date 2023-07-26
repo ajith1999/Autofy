@@ -17,7 +17,7 @@ export type Options = {
   max: number | undefined;
   min_date: Date | undefined;
   max_date: Date | undefined;
-  value: string[] | undefined;
+  value: (string | undefined)[];
   country_code: string;
   is_random: boolean | undefined;
   size: number | undefined;

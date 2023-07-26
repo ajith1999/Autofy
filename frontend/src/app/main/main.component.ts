@@ -3,10 +3,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { DatatypeDialogComponent } from '../datatype-dialog/datatype-dialog.component';
 import { MatTable } from '@angular/material/table';
 import { Options } from '../datatypes/api';
+import { OptionDialogComponent } from '../option-dialog/option-dialog.component';
 
 export interface TableData {
   name: string;
   dataType: string;
+  datatype_json: string;
   options: Options;
 }
 
@@ -34,13 +36,51 @@ export class MainComponent implements OnInit {
       panelClass: 'my-custom-dialog-class',
     });
 
-    dialogRef.afterClosed().subscribe((val) => (element.dataType = val));
+    dialogRef.afterClosed().subscribe((val) => {
+      element.dataType = val.title;
+      element.datatype_json = val.datatype_json;
+    });
+    console.log(this.dataSource);
+  }
+
+  openOptionsDialog(element: any) {
+    const dialogRef = this.dialog.open(OptionDialogComponent, {
+      panelClass: 'my-custom-dialog',
+      data: {
+        datatype: element.datatype_json,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(
+      (val) => {
+        element.options = val;
+        console.log(val);
+      },
+      (err) => {
+        console.log(err);
+      },
+      () => {
+        this.table.renderRows();
+      }
+    );
+  }
+
+  optionsDisabled(element: any): boolean {
+    const enabledList = [
+      'custom_field',
+      'naming_series',
+      'phone_number',
+      'number',
+      'date_time',
+    ];
+    return !enabledList.some((val) => val === element.datatype_json);
   }
 
   addData() {
     const newRow: TableData = {
       name: '',
       dataType: '',
+      datatype_json: '',
       options: {
         min: undefined,
         max: undefined,

@@ -22,7 +22,7 @@ function generateRandomData(dataType, options, sequence) {
       return faker.internet.email();
     case "address":
       return faker.location.streetAddress();
-    case "phoneNumber":
+    case "phone_number":
       const code = options?.country_code ?? "IN";
       return randPhoneNumber({ countryCode: code });
     case "airport_code":
@@ -30,7 +30,7 @@ function generateRandomData(dataType, options, sequence) {
     case "company_name":
       return randCompanyName();
     case "alpha_numeric":
-      const size = options?.size ?? 5;
+      const size = options?.size ?? 8;
       return faker.string.alphanumeric(size);
     case "currency_code":
       return randCurrencyCode();
@@ -38,8 +38,11 @@ function generateRandomData(dataType, options, sequence) {
     case "boolean":
       return faker.datatype.boolean();
 
-      case "date_time":
-        return randBetweenDate({ from: new Date(options.min_date), to: new Date(options.max_date) })
+    case "date_time":
+      return randBetweenDate({
+        from: new Date(options.min_date),
+        to: new Date(options.max_date),
+      });
 
     case "naming_series":
       const { is_random, format } = options;
@@ -59,11 +62,7 @@ function generateRandomData(dataType, options, sequence) {
         return generateSequentialSeries(format, sequence);
       }
     case "number":
-      if (
-        !options?.is_random && (
-        !options.min ||
-        !options.max )
-      ) {
+      if (!options?.is_random && (!options.min || !options.max)) {
         throw new Error(
           "Invalid options. For number datatype, 'is_random', 'min', 'max' are required."
         );
@@ -81,13 +80,19 @@ function generateRandomData(dataType, options, sequence) {
         return generateSequentialNumberSeries(options.min, options.max);
       }
 
-      case "custom":
-        if (!options?.value || !Array.isArray(options.value) || options.value.length === 0) {
-          throw new Error("Invalid options. For custom datatype, 'value' should be a non-empty array.");
-        }
-  
-        const randomIndex = generateRandomNumber(0, options.value.length - 1);
-        return options.value[randomIndex];  
+    case "custom":
+      if (
+        !options?.value ||
+        !Array.isArray(options.value) ||
+        options.value.length === 0
+      ) {
+        throw new Error(
+          "Invalid options. For custom datatype, 'value' should be a non-empty array."
+        );
+      }
+
+      const randomIndex = generateRandomNumber(0, options.value.length - 1);
+      return options.value[randomIndex];
     default:
       throw new Error(`Invalid data type: ${dataType}`);
   }
