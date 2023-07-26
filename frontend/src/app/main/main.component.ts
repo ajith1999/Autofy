@@ -6,6 +6,7 @@ import { ApiData, Options, TableData } from '../datatypes/api';
 import { OptionDialogComponent } from '../option-dialog/option-dialog.component';
 import { DataService } from '../service/data.service';
 import { PreviewDialogComponent } from '../preview-dialog/preview-dialog.component';
+import { saveAs } from 'file-saver';
 
 const TABLE_DATA: TableData[] = [];
 
@@ -125,7 +126,21 @@ export class MainComponent implements OnInit {
     );
   }
 
-  settingUpJsonBody(rowCount: number) {
+  generateData() {
+    this.settingUpJsonBody(this.rows);
+    this.dataService.getData(this.jsonBody).subscribe(
+      (val) => {
+        console.log(val);
+        this.resultSet = val;
+      },
+      (err) => console.log(err),
+      () => {
+        this.exportSQL(this.resultSet, 'MOCK_TABLE');
+      }
+    );
+  }
+
+  settingUpJsonBody(rowCount: any) {
     this.jsonBody = {
       table_name: 'MOCK_DATA',
       num_rows: rowCount,
@@ -166,5 +181,11 @@ export class MainComponent implements OnInit {
     )}) VALUES \n${valueRows};`;
 
     return insertQuery;
+  }
+
+  exportSQL(jsonDataArray: any, tableName: any) {
+    const insertQuery = this.generateInsertQuery(jsonDataArray, tableName);
+    const blob = new Blob([insertQuery], { type: 'text/plain;charset=utf-8' });
+    saveAs(blob, 'output.sql');
   }
 }

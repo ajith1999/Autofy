@@ -1,5 +1,5 @@
-<h1 mat-dialog-title>Preview Data</h1>
-<mat-dialog-content>
+<h1 mat-dialog-title style="font-size: 30px">Preview Data</h1>
+<mat-dialog-content class="tabpre">
   <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <!-- Column Definitions -->
     <ng-container
@@ -7,12 +7,24 @@
       [matColumnDef]="column"
     >
       <mat-header-cell
+        class="header-cell"
         *matHeaderCellDef
-        style="font-weight: bold; font-size: medium"
+        style="
+          text-align: center;
+          font-weight: bold;
+          font-size: 30px;
+          max-width: 300px;
+          min-width: 300px;
+        "
       >
         {{ column }}
       </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{ element[column] }} </mat-cell>
+      <mat-cell
+        style="font-size: 25px; max-width: 300px; min-width: 300px"
+        *matCellDef="let element"
+      >
+        {{ element[column] }}
+      </mat-cell>
     </ng-container>
 
     <!-- Header and Row Declarations -->
