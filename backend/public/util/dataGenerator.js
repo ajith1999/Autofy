@@ -106,8 +106,8 @@ function generateData(input) {
     const dataRow = {};
 
     for (const field of columns_attributes) {
-      const { name, dataType, options } = field;
-      dataRow[name] = generateRandomData(dataType, options, i); // Call faker method dynamically
+      const { name, datatype_json, options } = field;
+      dataRow[name] = generateRandomData(datatype_json, options, i); // Call faker method dynamically
     }
 
     output.push(dataRow);

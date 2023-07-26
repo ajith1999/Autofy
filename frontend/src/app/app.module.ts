@@ -22,6 +22,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { OptionDialogComponent } from './option-dialog/option-dialog.component';
 import { PreviewDialogComponent } from './preview-dialog/preview-dialog.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -50,8 +51,9 @@ import { PreviewDialogComponent } from './preview-dialog/preview-dialog.componen
     MatInputModule,
     MatIconModule,
     FormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [HttpClient],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

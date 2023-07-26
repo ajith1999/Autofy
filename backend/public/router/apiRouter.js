@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const dataGenerator = require('../util/dataGenerator');
 
-router.get("/faker", (req, res) => {
+router.put("/faker", (req, res) => {
   const jsonData = req.body;
 
   try {

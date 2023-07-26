@@ -99,7 +99,6 @@
       </button>
       <button
         mat-raised-button
-        [disabled]="true"
         class="demo-button"
         style="background-color: rgb(163, 236, 165)"
       >
@@ -109,7 +108,11 @@
         Generate Using AI
       </button>
       <span>#Rows</span>
-      <input class="inrows-button" placeholder="No.of Rows" />
+      <input
+        class="inrows-button"
+        placeholder="No.of Rows"
+        [(ngModel)]="rows"
+      />
     </div>
   </div>
 
@@ -122,9 +125,9 @@
     </button>
     <button
       mat-raised-button
-      [disabled]="true"
       class="gen-button"
       style="background-color: rgb(238, 243, 238)"
+      (click)="previewData()"
     >
       <span
         ><img src="https://cdn-icons-png.flaticon.com/128/2356/2356572.png"

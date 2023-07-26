@@ -4,6 +4,15 @@ const rateLimit = require("express-rate-limit");
 
 const app = express();
 
+const cors = require("cors");
+app.use(
+  cors({
+    origin: "*",
+  })
+);
+
+app.use(cors());
+
 const apiRouter = require("./public/router/apiRouter");
 
 const port = process.env.PORT || 3000;
@@ -20,7 +29,6 @@ const apiLimiter = rateLimit({
 app.use(apiLimiter);
 
 app.use("/api/v1", apiRouter);
-
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);

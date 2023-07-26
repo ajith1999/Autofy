@@ -2,15 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DatatypeDialogComponent } from '../datatype-dialog/datatype-dialog.component';
 import { MatTable } from '@angular/material/table';
-import { Options } from '../datatypes/api';
+import { ApiData, Options, TableData } from '../datatypes/api';
 import { OptionDialogComponent } from '../option-dialog/option-dialog.component';
-
-export interface TableData {
-  name: string;
-  dataType: string;
-  datatype_json: string;
-  options: Options;
-}
+import { DataService } from '../service/data.service';
 
 const TABLE_DATA: TableData[] = [];
 
@@ -22,13 +16,18 @@ const TABLE_DATA: TableData[] = [];
 export class MainComponent implements OnInit {
   displayedColumns: string[] = ['name', 'dataType', 'options', 'close'];
   dataSource = [...TABLE_DATA];
+  rows: number | undefined;
+  jsonBody: ApiData | undefined;
+  tableName: string | undefined;
 
   @ViewChild(MatTable) table: MatTable<TableData>;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, public dataService: DataService) {}
 
   ngOnInit(): void {
     this.addData();
+    //this.setJsonToEmptyOrNull(this.jsonBody);
+    console.log(this.jsonBody);
   }
 
   openDialog(element: any): void {
@@ -104,5 +103,31 @@ export class MainComponent implements OnInit {
     this.dataSource.splice(removeIndex, 1);
     this.table.renderRows();
     console.log(this.dataSource);
+  }
+
+  previewData() {
+    this.settingUpJsonBody(10);
+    this.dataService
+      .getData(this.jsonBody)
+      .subscribe((val) => console.log(val));
+  }
+
+  settingUpJsonBody(rowCount: number) {
+    this.jsonBody = {
+      table_name: 'MOCK_DATA',
+      num_rows: rowCount,
+      file_format: 'any',
+      columns_attributes: [...this.dataSource],
+    };
+  }
+
+  setJsonToEmptyOrNull(jsonObject: any) {
+    for (const key in jsonObject) {
+      if (typeof jsonObject[key] === 'object' && jsonObject[key] !== null) {
+        this.setJsonToEmptyOrNull(jsonObject[key]);
+      } else {
+        jsonObject[key] = null;
+      }
+    }
   }
 }
