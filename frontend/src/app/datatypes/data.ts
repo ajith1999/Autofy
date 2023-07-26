@@ -25,7 +25,7 @@ export const datas: DataType[] = [
     description:
       'Fictional email addresses resembling real formats, e.g., "john.doe@example.com"',
     category: 'General',
-    datatype_json: 'email_id',
+    datatype_json: 'email',
   },
   {
     title: 'Phone number',

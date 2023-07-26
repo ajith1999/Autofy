@@ -1,1 +1,27 @@
-<p>preview-dialog works!</p>
+<h1 mat-dialog-title>Preview Data</h1>
+<mat-dialog-content>
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Column Definitions -->
+    <ng-container
+      *ngFor="let column of displayedColumns"
+      [matColumnDef]="column"
+    >
+      <mat-header-cell
+        *matHeaderCellDef
+        style="font-weight: bold; font-size: medium"
+      >
+        {{ column }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element[column] }} </mat-cell>
+    </ng-container>
+
+    <!-- Header and Row Declarations -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="ok()">
+    OK
+  </button>
+</mat-dialog-actions>

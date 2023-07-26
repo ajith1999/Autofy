@@ -5,6 +5,7 @@ import { MatTable } from '@angular/material/table';
 import { ApiData, Options, TableData } from '../datatypes/api';
 import { OptionDialogComponent } from '../option-dialog/option-dialog.component';
 import { DataService } from '../service/data.service';
+import { PreviewDialogComponent } from '../preview-dialog/preview-dialog.component';
 
 const TABLE_DATA: TableData[] = [];
 
@@ -19,6 +20,7 @@ export class MainComponent implements OnInit {
   rows: number | undefined;
   jsonBody: ApiData | undefined;
   tableName: string | undefined;
+  resultSet: any;
 
   @ViewChild(MatTable) table: MatTable<TableData>;
 
@@ -107,9 +109,19 @@ export class MainComponent implements OnInit {
 
   previewData() {
     this.settingUpJsonBody(10);
-    this.dataService
-      .getData(this.jsonBody)
-      .subscribe((val) => console.log(val));
+    this.dataService.getData(this.jsonBody).subscribe(
+      (val) => {
+        console.log(val);
+        this.resultSet = val;
+      },
+      (err) => console.log(err),
+      () => {
+        const dialogRef = this.dialog.open(PreviewDialogComponent, {
+          panelClass: 'my-preview-dialog-class',
+          data: this.resultSet,
+        });
+      }
+    );
   }
 
   settingUpJsonBody(rowCount: number) {
