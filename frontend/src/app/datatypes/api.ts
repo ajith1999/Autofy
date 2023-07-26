@@ -21,4 +21,5 @@ export type Options = {
   country_code: string;
   is_random: boolean | undefined;
   size: number | undefined;
+  html_value: string | undefined;
 };

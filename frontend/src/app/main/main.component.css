@@ -1,10 +1,8 @@
 .demo-table {
   width: 100%;
   padding: 20px;
-  margin: 20px;
-  text-align: center;
   background-color: white;
-  border-radius: 20px;
+  border-radius: 25px;
 }
 
 .demo-button-container {
@@ -25,7 +23,6 @@
   padding: 40px;
   margin-left: 200px;
   margin-right: 200px;
-
   border-radius: 15px;
 }
 
@@ -34,8 +31,7 @@ img {
 }
 
 .table-cell {
-  width: 400px;
-  padding-top: 50px;
+  width: 450px;
   margin: 0;
   border-color: white;
 }
@@ -45,9 +41,14 @@ img {
 }
 
 .header-cell {
-  text-align: center;
   font-size: 30px;
   border-color: rgb(255, 255, 255);
+}
+
+mat-table {
+  min-height: 300px !important;
+  max-height: 300px !important;
+  min-width: 300px;
 }
 
 /*To maintain the size of mat form fields*/
@@ -76,4 +77,28 @@ img {
 
 .icon-display {
   transform: scale(2);
+  margin-bottom: 65px;
+}
+
+.inrows-button {
+  margin: 20px;
+  width: 200px;
+  height: 70px;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.gen-button-container {
+  padding-bottom: 16px;
+  margin: 20px;
+  justify-content: center;
+  margin-left: 1100px;
+}
+
+.gen-button {
+  margin: 20px;
+  width: 400px;
+  height: 70px;
+  border-radius: 10px;
+  background-color: rgb(21, 237, 179);
 }

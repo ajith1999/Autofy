@@ -50,6 +50,7 @@ export class MainComponent implements OnInit {
         country_code: '',
         is_random: undefined,
         size: undefined,
+        html_value: undefined,
       },
     };
     this.dataSource = [...this.dataSource, newRow];
