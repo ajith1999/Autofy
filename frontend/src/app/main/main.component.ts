@@ -89,9 +89,10 @@ export class MainComponent implements OnInit {
         max_date: undefined,
         value: [],
         country_code: '',
-        is_random: undefined,
+        is_random: true,
         size: undefined,
         html_value: undefined,
+        format: '',
       },
     };
     this.dataSource = [...this.dataSource, newRow];
@@ -141,5 +142,29 @@ export class MainComponent implements OnInit {
         jsonObject[key] = null;
       }
     }
+  }
+
+  generateInsertQuery(jsonArray: any, tableName: any) {
+    if (!Array.isArray(jsonArray) || jsonArray.length === 0) {
+      throw new Error('jsonData must be a non-empty array of JSON objects.');
+    }
+
+    const keys = Object.keys(jsonArray[0]);
+    const valueRows = jsonArray
+      .map((jsonData) => {
+        return `(${Object.values(jsonData)
+          .map((val) => {
+            if (typeof val === 'string') return `'${val}'`;
+            return val;
+          })
+          .join(', ')})`;
+      })
+      .join(',\n');
+
+    const insertQuery = `INSERT INTO ${tableName} (${keys.join(
+      ', '
+    )}) VALUES \n${valueRows};`;
+
+    return insertQuery;
   }
 }

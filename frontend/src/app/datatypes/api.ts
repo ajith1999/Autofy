@@ -22,4 +22,5 @@ export type Options = {
   is_random: boolean | undefined;
   size: number | undefined;
   html_value: string | undefined;
+  format: string | undefined;
 };

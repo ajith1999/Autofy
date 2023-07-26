@@ -34,6 +34,7 @@ export class OptionDialogComponent implements OnInit {
       is_random: undefined,
       size: undefined,
       html_value: undefined,
+      format: undefined,
     };
   }
 
@@ -53,10 +54,9 @@ export class OptionDialogComponent implements OnInit {
     } else if (this.data.datatype === 'naming_series') {
       //logic for naming_series
       const stringValue = this.naming_series;
-      let valueArray = [];
-      valueArray.push(stringValue);
-      this.outputData.value = valueArray;
-      this.outputData.html_value = valueArray[0];
+      this.outputData.format = stringValue;
+      this.outputData.html_value = stringValue;
+      this.outputData.is_random = true;
       this.dialogRef.close(this.outputData);
     } else if (this.data.datatype === 'country_code') {
       //logic for country code

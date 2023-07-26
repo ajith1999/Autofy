@@ -5,6 +5,7 @@ const {
   randCompanyName,
   randCurrencyCode,
   randBetweenDate,
+  randAirline,
 } = require("@ngneat/falso");
 const {
   generateRandomSeries,
@@ -22,6 +23,8 @@ function generateRandomData(dataType, options, sequence) {
       return faker.internet.email();
     case "address":
       return faker.location.streetAddress();
+    case "airline":
+      return randAirline();
     case "phone_number":
       const code = options?.country_code ?? "IN";
       return randPhoneNumber({ countryCode: code });
@@ -80,7 +83,7 @@ function generateRandomData(dataType, options, sequence) {
         return generateSequentialNumberSeries(options.min, options.max);
       }
 
-    case "custom":
+    case "custom_field":
       if (
         !options?.value ||
         !Array.isArray(options.value) ||
